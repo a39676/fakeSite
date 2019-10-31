@@ -1,0 +1,65 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+buildscript {
+	repositories {
+    	mavenCentral()
+    	jcenter()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.9.RELEASE")
+	}
+}
+
+bootJar {
+	baseName = 'cx'
+}
+
+group = 'cx'
+version = '0.0.1'
+
+println System.getProperty("java.home")
+
+// JDK version source compatibility
+compileJava {
+	sourceCompatibility = '1.8'
+	targetCompatibility = '1.8'
+}
+
+[compileJava,compileTestJava,javadoc]*.options*.encoding = 'UTF-8'
+
+
+// In this section you declare where to find the dependencies of your project
+repositories {
+    mavenCentral()
+    jcenter()
+    flatDir {
+        dirs 'libs/'
+    }
+}
+
+
+dependencies {
+
+	// spring boot
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter', version: '2.1.5.RELEASE'
+	// compile group: 'org.springframework.boot', name: 'spring-boot-starter-web'
+    compile("org.springframework.boot:spring-boot-starter-web"){
+    	exclude module: "spring-boot-starter-logging"
+    }
+	compile group: 'org.springframework.boot', name: 'spring-boot-devtools'
+    
+
+    compile group: 'com.google.code.gson', name: 'gson', version: '2.8.5'
+
+	
+	// for jsp
+	compile group: 'org.apache.tomcat.embed', name: 'tomcat-embed-jasper', version: '9.0.20'
+	compile group: 'javax.servlet.jsp', name: 'jsp-api', version: '2.2'
+	compile group: 'javax.servlet', name: 'jstl', version: '1.2'
+	
+	compile group: 'org.apache.maven.plugins', name: 'maven-resources-plugin', version: '3.1.0'
+	
+}
