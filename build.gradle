@@ -14,10 +14,10 @@ buildscript {
 }
 
 bootJar {
-	baseName = 'cx'
+	baseName = 'fakeSite'
 }
 
-group = 'cx'
+group = 'fakeSite'
 version = '0'
 
 println System.getProperty("java.home")
